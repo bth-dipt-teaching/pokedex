@@ -35,11 +35,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  #cache network image
   cached_network_image: ^3.3.0
-  intl: ^0.18.1
+
+  #http calls and logger
   dio: ^5.3.4
   pretty_dio_logger: ^1.3.1
+
+  #color palette generator
   palette_generator: ^0.3.3+3
+
+  #linear percentage indicator
   percent_indicator: ^4.2.3
 
 

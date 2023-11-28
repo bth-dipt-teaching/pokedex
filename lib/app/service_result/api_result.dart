@@ -1,3 +1,5 @@
+/// A sealed class [ApiResult] that handles all [API] requests
+
 sealed class ApiResult<T> {}
 
 class ApiError<T> extends ApiResult<T> {
@@ -12,7 +14,10 @@ class ApiSuccess<T> extends ApiResult<T> {
   ApiSuccess(this.data);
 }
 
+
+/// An extension to extract [ApiResult]
 extension ApiResultExtension on ApiResult {
+  //extract response
   extract() {
     if (this is ApiSuccess) {
       return (this as ApiSuccess).data;
@@ -20,7 +25,7 @@ extension ApiResultExtension on ApiResult {
       throw (this as ApiError).errorMessage;
     }
   }
-
+  //extract successful response or null when it is an error
   extractOrNull() {
     if (this is ApiSuccess) {
       return (this as ApiSuccess).data;

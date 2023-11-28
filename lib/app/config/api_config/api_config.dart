@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-///Define all [API] configurations.
+///This class defines all [API] configurations including baseURL, connect
+///timeouts, headers amongst others.
 class ApiConfig {
   ApiConfig(
     this.baseUrl, {

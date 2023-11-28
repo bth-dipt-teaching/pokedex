@@ -5,6 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:pokedex/app/config/api_config/api_config.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+
+
+///Api client for making api calls, it uses dio as http client and it contains
+///all the configurations GET, POST, PUT, DELETE, PATCH requests
 class ApiClient {
   ApiClient(
     this._apiConfig, {

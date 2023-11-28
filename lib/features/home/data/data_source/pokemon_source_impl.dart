@@ -5,6 +5,9 @@ import 'package:pokedex/features/home/data/models/pokemon_details.dart';
 import 'package:pokedex/features/home/data/models/pokemon_list.dart';
 import 'package:pokedex/features/home/domain/params/pokemon_list_params.dart';
 
+
+///[PokemonDataSourceImpl] is an implementation of [PokemonDataSource] that
+///uses [ApiClient] to make the API calls
 class PokemonDataSourceImpl extends PokemonDataSource {
   @override
   Future<PokemonList> getPokemonList(

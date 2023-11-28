@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:pokedex/features/home/data/models/pokemon_details.dart';
 
 import 'pokemon_type.dart';
+
+
+///[PokemonType] is a model class that defines the types from [PokemonDetails]
 
 @immutable
 class Types {

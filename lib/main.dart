@@ -8,12 +8,15 @@ import 'package:pokedex/src/constants/constants.dart';
 import 'app.dart';
 import 'app/services/api/api_client.dart';
 
+///This is the starting point of the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // initialize api client and api config
   apiConfig = await Future.value(ApiConfig(baseUrl));
   apiClient = ApiClient(apiConfig);
+  //initialize data source and repository
   pokemonDataSource = await Future.value(PokemonDataSourceImpl());
   pokemonRepository = PokemonRepositoryImpl(pokemonDataSource);
-
+  // run the app
   runApp(const PokedexApp());
 }

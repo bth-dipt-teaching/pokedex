@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+
+///[PokemonType] is a model class that defines the types of a pokemon
+///details
 @immutable
 class PokemonType {
   const PokemonType({

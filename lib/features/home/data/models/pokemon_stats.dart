@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import 'stats.dart';
 
+///[PokemonDetails] is a model class that defines the stats of a pokemon
+///details
 @immutable
 class PokemonStats {
   const PokemonStats({

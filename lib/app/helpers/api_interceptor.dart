@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pokedex/app/service_result/api_result.dart';
 
+///API interceptor to handle https responses, it returns the result when it is
+///successful but in-case of an error, it sends an error message to the user.
+
 typedef TypeDef = Function();
 
 Future<ApiResult<T>> apiInterceptor<T>(TypeDef func) async {

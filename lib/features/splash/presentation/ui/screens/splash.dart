@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+
+///This is the splash screen that shows when the app is launched
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
