@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/dependency_injection/dependency_injection.dart';
 import 'package:pokedex/app/service_result/api_result.dart';
@@ -13,11 +15,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //late final ScrollController scrollController;
+  // scroll controller to track the pokemon list
+  ScrollController scrollController = ScrollController();
   PokemonList pokemonList = PokemonList(items: []);
 
+  //to keep track of the initial loading state
   bool initialLoading = true;
+
+  //to keep track of the error state
   bool hasError = false;
+
+  //to know if there is more data to load
+  bool hasMore = false;
+
+  //to keep track of the offset to load more data
   int offset = 0;
 
   @override
@@ -26,23 +37,39 @@ class _HomeScreenState extends State<HomeScreen> {
     getPokemon(firstLoad: true);
   }
 
+  //function to get the pokemon list, firstLoad is to know if it is the first
+  //time, else it will load more data
   getPokemon({bool firstLoad = false}) async {
+    //pokemon list params for the api call
     PokemonListParams params = PokemonListParams(limit: 20, offset: offset);
+    //get the pokemon list from the repository
     final result = await pokemonRepository.getPokemonList(params: params);
+    //check if the result is success or not
     PokemonList? newList = result.extractOrNull();
+    //update the pokemonList
     setState(() {
       if (newList != null) {
-        firstLoad ? pokemonList = newList : pokemonList.update(newList);
+        firstLoad
+            ? pokemonList = newList
+            : pokemonList = pokemonList.update(newList);
         offset += 20;
       } else {
         if (mounted) {
           hasError = true;
         }
       }
+
       if (mounted && initialLoading) {
         initialLoading = false;
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    //dispose the scroll controller to avoid memory leaks
+    scrollController.dispose();
   }
 
   @override
@@ -56,18 +83,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Scrollbar(
-              thickness: 5,
-              interactive: true,
-              child: NotificationListener(
-                onNotification: (notification) {
-                  return false;
-                },
+          : NotificationListener(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollEndNotification &&
+                    (scrollController.offset >=
+                        (scrollController.position.maxScrollExtent - 10))) {
+                  if (pokemonList.count! > pokemonList.items!.length) {
+                    getPokemon();
+                  } else {}
+                }
+                return true;
+              },
+              child: Scrollbar(
+                thickness: 5,
+                interactive: true,
                 child: SingleChildScrollView(
+                  controller: scrollController,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: GridView.builder(
                     itemCount: pokemonList.items!.length,
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
