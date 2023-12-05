@@ -25,8 +25,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ### GIF
 
-| 1                                                                                       |
-|-----------------------------------------------------------------------------------------|
+| 1                                          |
+|--------------------------------------------|
 | ![](assets/gif/screen_record.gif?raw=true) |
 
 ### Dark
