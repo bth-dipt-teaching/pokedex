@@ -27,7 +27,7 @@ samples, guidance on mobile development, and a full API reference.
 
 | 1                                                                                       |
 |-----------------------------------------------------------------------------------------|
-| ![](https://github.com/bth-dipt-teaching/pokedex/assets/gif/screen_record.gif?raw=true) |
+| ![](assets/gif/screen_record.gif?raw=true) |
 
 ### Dark
 
