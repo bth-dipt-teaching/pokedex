@@ -1,4 +1,3 @@
-
 /// Parameters for the [PokemonList] use case.
 class PokemonListParams {
   final int limit;

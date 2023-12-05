@@ -22,60 +22,62 @@ class PokemonCard extends StatelessWidget {
     }
 
     return FutureBuilder(
-        future: generateBg(),
-        builder: (context, snapshot) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return PokemonDetailsScreen(
-                      pokemon: pokemon,
-                      paletteGenerator: snapshot.data!,
-                    );
-                  },
+      future: generateBg(),
+      builder: (context, snapshot) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return PokemonDetailsScreen(
+                    pokemon: pokemon,
+                    paletteGenerator: snapshot.data!,
+                  );
+                },
+              ),
+            );
+          },
+          child: Container(
+            height: 350,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8,
+                  offset: Offset(0, 2),
                 ),
-              );
-            },
-            child: Container(
-                height: 350,
-                // width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                  color: snapshot.data?.dominantColor?.color ??
-                      Theme.of(context).colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(16),
+              ],
+              color: snapshot.data?.dominantColor?.color ??
+                  Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Hero(
+                  tag: 'pokemon-${pokemon.name}',
+                  child: CachedNetworkImage(
+                    imageUrl: pokemon.imageUrl,
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Hero(
-                      tag: 'pokemon-${pokemon.name}',
-                      child: CachedNetworkImage(
-                        imageUrl: pokemon.imageUrl,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      pokemon.name?.capitalizeFirstLetter() ?? '',
-                      style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
-                    ),
-                  ],
-                )),
-          );
-        });
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  pokemon.name?.capitalizeFirstLetter() ?? '',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

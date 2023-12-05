@@ -1,4 +1,3 @@
-
 /// Pokemon model
 class Pokemon {
   final String? name;

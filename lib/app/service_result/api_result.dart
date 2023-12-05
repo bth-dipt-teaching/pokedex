@@ -14,7 +14,6 @@ class ApiSuccess<T> extends ApiResult<T> {
   ApiSuccess(this.data);
 }
 
-
 /// An extension to extract [ApiResult]
 extension ApiResultExtension on ApiResult {
   //extract response
@@ -25,6 +24,7 @@ extension ApiResultExtension on ApiResult {
       throw (this as ApiError).errorMessage;
     }
   }
+
   //extract successful response or null when it is an error
   extractOrNull() {
     if (this is ApiSuccess) {

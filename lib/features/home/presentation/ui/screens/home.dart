@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/dependency_injection/dependency_injection.dart';
 import 'package:pokedex/app/service_result/api_result.dart';
@@ -107,10 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     addRepaintBoundaries: false,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.88,
-                            crossAxisSpacing: 16),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.88,
+                      crossAxisSpacing: 16,
+                    ),
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
