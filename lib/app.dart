@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/home/presentation/ui/screens/home.dart';
-import 'package:pokedex/features/home/presentation/ui/screens/pokemon_details.dart';
 import 'package:pokedex/features/splash/presentation/ui/screens/splash.dart';
 import 'package:pokedex/src/res/theme/app_theme.dart';
 
@@ -11,15 +10,16 @@ class PokedexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Pokedex',
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        routes: {
-          /// '/' is the default route
-          '/': (context) => const SplashScreen(),
-          '/home': (context) => const HomeScreen(),
-        });
+      title: 'Pokedex',
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      routes: {
+        /// '/' is the default route
+        '/': (context) => const SplashScreen(),
+        '/home': (context) => const HomeScreen(),
+      },
+    );
   }
 }

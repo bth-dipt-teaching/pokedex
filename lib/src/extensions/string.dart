@@ -8,7 +8,8 @@ extension StringExtension on String {
     // Capitalize the first letter of each word
     for (int i = 0; i < words.length; i++) {
       if (words[i].isNotEmpty) {
-        words[i] = words[i][0].toUpperCase() + words[i].substring(1).toLowerCase();
+        words[i] =
+            words[i][0].toUpperCase() + words[i].substring(1).toLowerCase();
       }
     }
 
@@ -18,8 +19,10 @@ extension StringExtension on String {
 
   String toHumanReadable() {
     // Convert camelCase to words
-    String result = replaceAllMapped(RegExp(r'([a-z0-9])([A-Z])'),
-        (match) => '${match.group(1)} ${match.group(2)}');
+    String result = replaceAllMapped(
+      RegExp(r'([a-z0-9])([A-Z])'),
+      (match) => '${match.group(1)} ${match.group(2)}',
+    );
 
     // Convert snake_case and kebab-case to words
     result = result.replaceAll(RegExp(r'[_-]'), ' ');

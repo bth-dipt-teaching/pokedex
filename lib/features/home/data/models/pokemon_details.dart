@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'pokemon_stats.dart';
 import 'types.dart';
 
-
 ///[PokemonDetails] is a model class that defines the properties of a pokemon
 ///details
 @immutable

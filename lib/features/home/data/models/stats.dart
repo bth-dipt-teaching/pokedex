@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-
 ///[PokemonType] is a model class that defines the stats of a pokemon
 @immutable
 class Stat {

@@ -14,17 +14,15 @@ class MetricDetails extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.onPrimary),
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
         ),
         Text(
           title,
           style: TextStyle(color: Theme.of(context).colorScheme.outline),
         ),
-
-
-
       ],
     );
   }

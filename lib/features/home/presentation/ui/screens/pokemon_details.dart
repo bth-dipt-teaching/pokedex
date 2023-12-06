@@ -15,8 +15,11 @@ class PokemonDetailsScreen extends StatefulWidget {
   final Pokemon pokemon;
   final PaletteGenerator paletteGenerator;
 
-  const PokemonDetailsScreen(
-      {super.key, required this.pokemon, required this.paletteGenerator});
+  const PokemonDetailsScreen({
+    super.key,
+    required this.pokemon,
+    required this.paletteGenerator,
+  });
 
   @override
   State<PokemonDetailsScreen> createState() => _PokemonDetailsScreenState();
@@ -30,7 +33,8 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
 
   Future<PokemonDetails?> loadPokemonDetails() async {
     final result = await pokemonRepository.getPokemonDetails(
-        pokemonName: widget.pokemon.name!);
+      pokemonName: widget.pokemon.name!,
+    );
     PokemonDetails? details = result.extractOrNull();
 
     return details;
@@ -45,9 +49,11 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
       appBar: AppBar(
         centerTitle: false,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(48),
-                bottomLeft: Radius.circular(48))),
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(48),
+            bottomLeft: Radius.circular(48),
+          ),
+        ),
         elevation: 0,
         backgroundColor: widget.paletteGenerator.dominantColor?.color ??
             const Color(0xFFB8DFCA),
@@ -58,20 +64,25 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
             child: Text(
               '#${widget.pokemon.id}',
               style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  fontStyle: FontStyle.italic),
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                fontStyle: FontStyle.italic,
+              ),
             ),
-          )
+          ),
         ],
         bottom: PreferredSize(
-            preferredSize: const Size(double.maxFinite, 200),
-            child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 200),
-                child: Hero(
-                    tag: 'pokemon-${widget.pokemon.name}',
-                    child: CachedNetworkImage(
-                        imageUrl: widget.pokemon.imageUrl)))),
+          preferredSize: const Size(double.maxFinite, 200),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200),
+            child: Hero(
+              tag: 'pokemon-${widget.pokemon.name}',
+              child: CachedNetworkImage(
+                imageUrl: widget.pokemon.imageUrl,
+              ),
+            ),
+          ),
+        ),
       ),
       body: ListView(
         children: [
@@ -82,65 +93,73 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
             widget.pokemon.name?.capitalizeFirstLetter() ?? '',
             textAlign: TextAlign.center,
             style: const TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 26, color: Colors.white),
+              fontWeight: FontWeight.w600,
+              fontSize: 26,
+              color: Colors.white,
+            ),
           ),
           FutureBuilder<PokemonDetails?>(
-              future: loadPokemonDetails(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
-                    final data = snapshot.data!;
+            future: loadPokemonDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data!;
 
-                    return Column(
-                      children: [
-                        Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          spacing: 20,
-                          children: data.types
-                                  ?.map(
-                                    (e) => Chip(
-                                      backgroundColor: widget
-                                          .paletteGenerator
-                                          .paletteColors[random.nextInt(
-                                              paletteColors.length - 1)]
-                                          .color,
-                                      label: Text(
-                                        e.type!.name!.capitalizeFirstLetter(),
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                  return Column(
+                    children: [
+                      Wrap(
+                        alignment: WrapAlignment.spaceEvenly,
+                        spacing: 20,
+                        children: data.types
+                                ?.map(
+                                  (e) => Chip(
+                                    backgroundColor: widget
+                                        .paletteGenerator
+                                        .paletteColors[random.nextInt(
+                                      paletteColors.length - 1,
+                                    )]
+                                        .color,
+                                    label: Text(
+                                      e.type!.name!.capitalizeFirstLetter(),
+                                      style: const TextStyle(
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  )
-                                  .toList() ??
-                              [],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            MetricDetails(
-                                title: 'Weight',
-                                value: '${data.convertedWeight} KG'),
-                            MetricDetails(
-                              title: 'Height',
-                              value: '${data.convertedHeight} M',
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 32),
-                        PokemonBaseStatsIndicators(
-                          baseStats: data.stats ?? [],
-                        ),
-                      ],
-                    );
-                  }
+                                  ),
+                                )
+                                .toList() ??
+                            [],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          MetricDetails(
+                            title: 'Weight',
+                            value: '${data.convertedWeight} KG',
+                          ),
+                          MetricDetails(
+                            title: 'Height',
+                            value: '${data.convertedHeight} M',
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 32),
+                      PokemonBaseStatsIndicators(
+                        baseStats: data.stats ?? [],
+                      ),
+                    ],
+                  );
                 }
+              }
 
-                return const SizedBox(
-                    height: 300,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ));
-              })
+              return const SizedBox(
+                height: 300,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-
 ///[PokemonType] is a model class that defines the types of a pokemon
 ///details
 @immutable
@@ -11,9 +10,9 @@ class PokemonType {
   });
 
   factory PokemonType.fromJson(Map<String, dynamic> json) => PokemonType(
-    name: json['name'] as String,
-    url: json['url'] as String,
-  );
+        name: json['name'] as String,
+        url: json['url'] as String,
+      );
 
   final String? name;
   final String? url;
@@ -21,10 +20,10 @@ class PokemonType {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is PokemonType &&
-              other.runtimeType == runtimeType &&
-              other.name == name &&
-              other.url == url;
+      other is PokemonType &&
+          other.runtimeType == runtimeType &&
+          other.name == name &&
+          other.url == url;
 
   @override
   int get hashCode => name.hashCode ^ url.hashCode;
