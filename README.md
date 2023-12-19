@@ -43,8 +43,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Architecture
 
-![architecture diagram](./arch-dagre.svg)
-[architecture diagram](./arch-dagre.svg)
+![](assets/architecture/arch.svg)
 
 ### Folder Structure
 
