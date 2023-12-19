@@ -41,6 +41,56 @@ samples, guidance on mobile development, and a full API reference.
 |--------------------------------------------------------|--------------------------------------------------------|
 | <img src="assets/screenshots/light/1.png" width="400"> | <img src="assets/screenshots/light/2.png" width="400"> |
 
+## Architecture
+
+```mermaid
+graph TB
+    subgraph Presentation
+        subgraph Home
+            subgraph Views
+                HomeScreen <-->|navigate to| PokemonDetailsScreen
+            end
+            subgraph Widgets
+                PokemonBaseStatsIndicators
+                MetricDetails
+                ValueIndicator
+                PokemonCard
+            end
+            HomeScreen -->|uses|PokemonCard
+            PokemonDetailsScreen -->|uses|MetricDetails
+            PokemonDetailsScreen -->|uses|ValueIndicator
+            PokemonDetailsScreen -->|uses|PokemonBaseStatsIndicators
+        end
+        subgraph Splash
+            SplashScreen -->|navigate to| HomeScreen
+        end
+    end
+    subgraph Domain
+        PokemonRepository -->|config based on| PokemonListParams
+    end
+    subgraph Data
+        subgraph Data Source
+            PokemonDataSource
+        end
+        subgraph Models
+            Pokemon
+            PokemonList 
+            PokemonList --> Pokemon
+            PokemonDetails 
+            PokemonDetails --> PokemonStats
+            PokemonDetails --> PokemonType
+            PokemonStats --> Stats
+            PokemonType --> Types
+        end
+        PokemonDataSource ---|parse into model|PokemonList
+        PokemonDataSource ---|parse into model|PokemonDetails
+    end
+    PokemonDataSource -->|HTTP GET|API[(Pokemon API)]
+    HomeScreen <--> PokemonRepository
+    PokemonDetailsScreen <--> PokemonRepository
+    PokemonRepository -->|request data|PokemonDataSource
+```
+
 ### Folder Structure
 
 The folder structure of this project is as follows:
