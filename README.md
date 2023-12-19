@@ -41,6 +41,11 @@ samples, guidance on mobile development, and a full API reference.
 |--------------------------------------------------------|--------------------------------------------------------|
 | <img src="assets/screenshots/light/1.png" width="400"> | <img src="assets/screenshots/light/2.png" width="400"> |
 
+## Architecture
+
+![architecture diagram](./arch-dagre.svg)
+[architecture diagram](./arch-dagre.svg)
+
 ### Folder Structure
 
 The folder structure of this project is as follows:
